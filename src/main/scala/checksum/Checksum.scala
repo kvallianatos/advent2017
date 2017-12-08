@@ -12,10 +12,10 @@ object Checksum extends App {
     numbers.max - numbers.min
   }
 
-  def lineMod(div: Int, input: Array[Int]): Int = {
-    val x = input.headOption.getOrElse(return div)
+  def lineMod(input: Array[Int]): Int = {
+    val x = input.headOption.getOrElse(0)
     input.tail.foreach(y => if (x % y == 0) return x/y)
-    lineMod(div, input.tail)
+    lineMod(input.tail)
   }
 
   def generateChecksumPart1(acc: Int, input: Seq[Array[Int]]): Int = {
@@ -24,7 +24,7 @@ object Checksum extends App {
   println(generateChecksumPart1(0, input))
 
   def generateChecksumPart2(acc: Int, input: Seq[Array[Int]]): Int = {
-    generateChecksumPart2(acc + lineMod(0, input.headOption.getOrElse(return acc).sorted(Ordering.Int.reverse)), input.tail)
+    generateChecksumPart2(acc + lineMod(input.headOption.getOrElse(return acc).sorted(Ordering.Int.reverse)), input.tail)
   }
   println(generateChecksumPart2(0, input))
 }
